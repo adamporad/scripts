@@ -1,0 +1,43 @@
+;= Command Aliases. 
+clear=cls
+dkm=doskey /macros 2>&1 | sort
+ll=dir $*
+cdir=cls$Tdir $*
+
+
+;= Git Aliases
+gcs=cls$Tgit status $*
+gs=git status $*
+cs=cls$Tgit status $*
+
+;= Use git to compare 2 local files
+gdiff=git diff --no-index $*
+
+
+;= App shortcuts
+npp="C:\Program Files\Notepad++\notepad++.exe" $*
+
+st=%USERPROFILE%\Tools\set_title.bat $*
+
+;= Change Direcotry shortcuts
+
+home=cd /d %USERPROFILE%\$*
+homed=pushd %USERPROFILE%\$*
+
+repos=cd /d %USERPROFILE%\source\repos
+
+src=cd /d C:\src
+srcd=pushd C:\src
+
+
+
+;=hacks ----------------------------
+
+;=create a folder and make backup copies of files in the current folder
+mkbackup=robocopy . Backup-%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%_%time:~0,2%%time:~3,2%
+
+
+
+;= Note: Using a macro named with ; as a work-around for comments. 
+;= Need to set ; to null at the end otherwise, an error on load may occur. 
+;= 
