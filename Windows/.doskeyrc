@@ -26,9 +26,8 @@ homed=pushd %USERPROFILE%\$*
 
 repos=cd /d %USERPROFILE%\source\repos
 
-src=cd /d C:\src
-srcd=pushd C:\src
-
+src=cd /d C:\src $T IF EXIST "$*" (cd "$*") ELSE (echo subfolder '$*' not found.)
+srcd=pushd C:\src $T IF EXIST "$*" (cd "$*") ELSE (echo subfolder '$*' not found.)
 
 
 ;=hacks ----------------------------
