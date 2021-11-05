@@ -4,11 +4,23 @@ dkm=doskey /macros 2>&1 | sort
 ll=dir $*
 cdir=cls$Tdir $*
 
+guid=powershell New-Guid | Tee-Object -Variable newguid ; Set-Clipboard $newguid
+
+bc4="C:\Program Files\Beyond Compare 4\BCompare.exe" $*
+
 
 ;= Git Aliases
-gcs=cls$Tgit status $*
 gs=git status $*
 cs=cls$Tgit status $*
+
+gb=git branch -vv $*
+cb=cls$Tgit branch -vv $*
+
+gbn=git branch --show-current
+glg=git log --graph --pretty=oneline --abbrev-commit
+
+
+
 
 ;= Use git to compare 2 local files
 gdiff=git diff --no-index $*
@@ -17,20 +29,30 @@ gdiff=git diff --no-index $*
 ;= App shortcuts
 npp="C:\Program Files\Notepad++\notepad++.exe" $*
 
+;= set title of command prompt tab (based on input arg if exist else to current folder name)
 st=%USERPROFILE%\Tools\set_title.bat $*
 
-;= Change Direcotry shortcuts
+;= set title to current directory name
+tabtitle=for %I in (.) do title %~nxI
 
+;= replace back slash characters in string with slash characters
+flip=C:\users\aporad\tools\flipSlash.bat $*
+
+
+;= Change Directory shortcuts
 home=cd /d %USERPROFILE%\$*
 homed=pushd %USERPROFILE%\$*
 
 repos=cd /d %USERPROFILE%\source\repos
 
-src=cd /d C:\src $T IF EXIST "$*" (cd "$*") ELSE (echo subfolder '$*' not found.)
-srcd=pushd C:\src $T IF EXIST "$*" (cd "$*") ELSE (echo subfolder '$*' not found.)
+src=cd /d C:\src $T IF EXIST "$*" (cd "$*") ELSE (if not "$*"=="" echo subfolder '$*' not found.)
+srcd=pushd C:\src $T IF EXIST "$*" (cd "$*") ELSE (if not "$*"=="" echo subfolder '$*' not found.)
 
+el=ECHO %ERRORLEVEL%
 
 ;=hacks ----------------------------
+
+
 
 ;=create a folder and make backup copies of files in the current folder
 mkbackup=robocopy . Backup-%DATE:~10,4%-%DATE:~4,2%-%DATE:~7,2%_%time:~0,2%%time:~3,2%
